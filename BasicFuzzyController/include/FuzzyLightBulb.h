@@ -18,6 +18,7 @@
 #define FUZZYLIGHTBULB_H__
 
 #include <cstdlib>
+#include <map>
 
 #include <fuzzy/FuzzyTrapezoid.h>
 #include <fuzzy/FuzzyTriangle.h>
@@ -25,14 +26,27 @@
 class FuzzyLightBulb
 {
   public:
+    enum Target {LOWKEY, NEUTRALKEY, HIGHKEY};
+    enum Command {DIM, NOCHANGE, BRIGHTEN};
     FuzzyLightBulb();
     ~FuzzyLightBulb();
     void fuzzification();
     void inference();
     void defuzzification();
+    inline void setInput(const double &_input) { m_input = _input; }
+    inline double getOutput() { return m_output; }
+    void setTarget(const Target &_target);
   protected:
   private:
     std::vector<fuzzy::FuzzyBase *> m_fuzzySet;
-}
+    std::map<std::string, FuzzyLightBulb::Command> m_fuzzyRules;
+    double m_input;
+    double m_output;
+    std::string m_target;
+    // store fuzzy membership values
+    float m_degLowKey;
+    float m_degNeutralKey;
+    float m_degHighKey;
+};
 
 #endif // FUZZYLIGHTBULB

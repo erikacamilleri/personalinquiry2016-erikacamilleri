@@ -5,8 +5,7 @@ basic OpenGL demo modified from http://qt-project.org/doc/qt-5.0/qtgui/openglwin
 #include <iostream>
 #include "NGLScene.h"
 
-#include "fuzzy/FuzzyTrapezoid.h"
-#include "fuzzy/FuzzyTriangle.h"
+#include "FuzzyLightBulb.h"
 
 int main(int argc, char **argv)
 {
@@ -44,20 +43,8 @@ int main(int argc, char **argv)
   window.show();
 
   // test fuzzy
-  std::vector<fuzzy::FuzzyBase*> fuzzyset;
-
-  fuzzyset.push_back(new fuzzy::FuzzyTrapezoid());
-  fuzzyset.push_back(new fuzzy::FuzzyTriangle());
-  fuzzyset.push_back(new fuzzy::FuzzyTrapezoid());
-
-  std::vector<float> middle;
-
-
-
-  for(auto &f : fuzzyset)
-  {
-    delete f;
-  }
+  FuzzyLightBulb *flb = new FuzzyLightBulb();
+  delete flb;
 
   return app.exec();
 }
